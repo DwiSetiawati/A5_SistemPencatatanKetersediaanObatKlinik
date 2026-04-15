@@ -38,6 +38,8 @@ namespace ObatKlinikADO
             }
         }
 
-       
+        // Tampilkan Data & Hitung Record (Bagian D & E)
+        void TampilkanData()
+      
     }
 }
