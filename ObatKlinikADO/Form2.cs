@@ -14,6 +14,11 @@ namespace ObatKlinikADO
     public partial class Form2 : Form
     {
         string connectionString = "Data Source=LAPTOP-PQSI1Q9H\\TIAA;Initial Catalog=KlinikObatDB;Integrated Security=True";
-       
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+     
     }
 }
