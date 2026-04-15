@@ -18,6 +18,13 @@ namespace ObatKlinikADO
         SqlCommand cmd;
         string roleLogin; // Untuk menampung kiriman dari FormLogin
 
-      
+        public Form1(string role)
+        {
+            InitializeComponent();
+            this.roleLogin = role;
+            con = new SqlConnection(connectionString);
+        }
+
+        
     }
 }
