@@ -26,6 +26,18 @@ namespace ObatKlinikADO
         }
 
         private void Form1_Load(object sender, EventArgs e)
-      
+        {
+            TampilkanData();
+            // Cek Hak Akses (Pemilik = Read Only)
+            if (roleLogin == "Pemilik")
+            {
+                btnTambah.Enabled = false;
+                btnHapus.Enabled = false;
+                btnUpdate.Enabled = false;
+                this.Text = "Mode Monitoring (Pemilik)";
+            }
+        }
+
+       
     }
 }
