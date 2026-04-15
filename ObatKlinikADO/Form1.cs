@@ -88,6 +88,21 @@ namespace ObatKlinikADO
             }
         }
 
+        private void btnCari_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            // Mencari data berdasarkan nama (Bagian E)
+            string query = "SELECT * FROM Obat WHERE nama_obat LIKE @cari";
+            cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@cari", "%" + txtCari.Text + "%");
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            dgvObat.DataSource = dt;
+            con.Close();
+        }
+
        
     }
 }
