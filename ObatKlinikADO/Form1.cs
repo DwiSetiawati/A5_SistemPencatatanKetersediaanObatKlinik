@@ -40,6 +40,22 @@ namespace ObatKlinikADO
 
         // Tampilkan Data & Hitung Record (Bagian D & E)
         void TampilkanData()
-      
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Obat", con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            dgvObat.DataSource = dt;
+            con.Close();
+
+            // ExecuteScalar untuk hitung total
+            con.Open();
+            SqlCommand cmdCount = new SqlCommand("SELECT COUNT(*) FROM Obat", con);
+            lblTotal.Text = "Total Jenis Obat: " + cmdCount.ExecuteScalar().ToString();
+            con.Close();
+        }
+
+       
     }
 }
