@@ -103,6 +103,35 @@ namespace ObatKlinikADO
             con.Close();
         }
 
-       
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // Validasi input (Bagian F)
+            if (txtID.Text == "" || txtNama.Text == "")
+            {
+                MessageBox.Show("Pilih data yang ingin diubah terlebih dahulu!");
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Apakah Anda yakin ingin mengubah data ini?", "Konfirmasi", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                con.Open();
+                // Query UPDATE (Bagian D)
+                string query = "UPDATE Obat SET nama_obat=@nama, satuan=@sat, stok_total=@stok WHERE id_obat=@id";
+                cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@id", txtID.Text);
+                cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                cmd.Parameters.AddWithValue("@sat", txtSatuan.Text);
+                cmd.Parameters.AddWithValue("@stok", txtStok.Text);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                MessageBox.Show("Data Berhasil Diperbarui!");
+                TampilkanData(); // Refresh tabel
+            }
+        }
+
+     
     }
 }
