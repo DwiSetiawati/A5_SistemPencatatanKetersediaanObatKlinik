@@ -74,6 +74,20 @@ namespace ObatKlinikADO
             TampilkanData();
         }
 
+        private void btnHapus_Click(object sender, EventArgs e)
+        {
+            DialogResult kf = MessageBox.Show("Yakin hapus?", "Konfirmasi", MessageBoxButtons.YesNo);
+            if (kf == DialogResult.Yes)
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM Obat WHERE id_obat=@id", con);
+                cmd.Parameters.AddWithValue("@id", txtID.Text);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                TampilkanData();
+            }
+        }
+
        
     }
 }
