@@ -57,6 +57,23 @@ namespace ObatKlinikADO
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
+        {
+            if (txtID.Text == "" || txtNama.Text == "")
+            { // Validasi Bagian F
+                MessageBox.Show("ID dan Nama wajib diisi!");
+                return;
+            }
+            con.Open();
+            SqlCommand cmd = new SqlCommand("INSERT INTO Obat VALUES (@id, @n, @s, @st)", con);
+            cmd.Parameters.AddWithValue("@id", txtID.Text);
+            cmd.Parameters.AddWithValue("@n", txtNama.Text);
+            cmd.Parameters.AddWithValue("@s", txtSatuan.Text);
+            cmd.Parameters.AddWithValue("@st", txtStok.Text);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            TampilkanData();
+        }
+
        
     }
 }
