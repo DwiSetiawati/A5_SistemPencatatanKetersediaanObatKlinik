@@ -56,6 +56,7 @@ namespace ObatKlinikADO
             con.Close();
         }
 
+        private void btnTambah_Click(object sender, EventArgs e)
        
     }
 }
