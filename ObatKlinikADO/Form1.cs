@@ -132,6 +132,17 @@ namespace ObatKlinikADO
             }
         }
 
-     
+        private void dgvObat_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvObat.Rows[e.RowIndex];
+                // Pindahkan data dari tabel ke TextBox (Bagian E)
+                txtID.Text = row.Cells["id_obat"].Value.ToString();
+                txtNama.Text = row.Cells["nama_obat"].Value.ToString();
+                txtSatuan.Text = row.Cells["satuan"].Value.ToString();
+                txtStok.Text = row.Cells["stok_total"].Value.ToString();
+            }
+        }
     }
 }
