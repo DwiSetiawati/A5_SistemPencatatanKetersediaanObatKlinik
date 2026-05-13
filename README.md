@@ -10,3 +10,48 @@ insert : <img width="1920" height="1080" alt="image" src="https://github.com/use
 update : <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4f4f1c43-f1bc-4fe7-8d41-2195ddcbfe28" />
 delete : <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f18e020d-15d4-4368-847e-a8577ba02072" />
 search : <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1d63ffd9-dc80-4efa-a24c-7f731b8d7e4c" />
+
+# Sistem Pencatatan Ketersediaan Obat Klinik
+
+## Teknologi
+- C# Windows Forms (.NET Framework)
+- SQL Server
+- ADO.NET
+
+## Fitur
+- CRUD Obat menggunakan Stored Procedure
+- Tampil data menggunakan VIEW v_DataObat
+- Binding DataGridView dengan BindingSource
+- BindingNavigator untuk navigasi data
+- Backup data ke tabel Backup_Obat
+
+## Cara Menjalankan
+1. Buka SQL Server Management Studio (SSMS)
+2. Jalankan file `database.sql`
+3. Buka project di Visual Studio 2022
+4. Sesuaikan connection string di `Form1.cs`
+5. Jalankan aplikasi (F5)
+
+## Struktur Database
+- Tabel: Obat, Akun, Users, Riwayat_Stok, Backup_Obat
+- View: v_DataObat, v_RiwayatStok
+- Stored Procedure: sp_Login, sp_TambahObat, sp_UpdateObat,
+  sp_HapusObat, sp_CariObat, sp_BackupDataObat
+
+## Keamanan: SQL Injection — Skenario & Pencegahan
+
+### Skenario Serangan
+Query rentan (raw string):
+```sql
+SELECT * FROM Akun WHERE username = '' OR '1'='1'
+```
+Input `' OR '1'='1` membuat kondisi selalu TRUE → bypass login tanpa password.
+
+### Pencegahan yang Diterapkan
+Aplikasi menggunakan parameterized query di seluruh operasi database:
+```csharp
+SqlCommand cmd = new SqlCommand("sp_TambahObat", con);
+cmd.CommandType = CommandType.StoredProcedure;
+cmd.Parameters.AddWithValue("@nama_obat", txtNama.Text.Trim());
+```
+Input user diperlakukan sebagai data, bukan bagian perintah SQL.
